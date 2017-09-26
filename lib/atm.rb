@@ -8,9 +8,7 @@ class Atm
 	end
 
 	def run
-
 		while true
-
 			case atm_message()
 			when 1
 				show_balance()
@@ -26,7 +24,6 @@ class Atm
 				atm_message()
 			end
 		end
-
 	end
 
 	def atm_message
