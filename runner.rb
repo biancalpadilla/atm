@@ -1,3 +1,3 @@
-load "./atm.rb"
+load "./lib/atm.rb"
 
 Atm.new.run
