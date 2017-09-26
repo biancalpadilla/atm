@@ -62,6 +62,8 @@ class Atm
 				transfer()
 			when 5
 				break
+			else
+				atm_message()
 			end
 		end
 
@@ -86,54 +88,62 @@ class Atm
 	end
 
 	def deposit
-		puts "Which account would you like to deposit into?"
-		puts "1. Savings Account"
-		puts "2. Checking Account"
-		choice = gets.chomp.to_i
+		atm_action = "deposit to"
 
-		puts "How much?"
-		amount = gets.chomp.to_i
-
-		case choice
+		case account_choice(atm_action)
 		when 1
+			amount = amount_choice()
 			@savings_account.deposit(amount)
 		when 2
+			amount = amount_choice()
 			@checking_account.deposit(amount)
+		else
+			account_choice(atm_action)
 		end
 	end
 
 	def withdraw
-		puts "Which account would you like to withdraw from?"
-		puts "1. Savings Account"
-		puts "2. Checking Account"
-		choice = gets.chomp.to_i
+		atm_action = "withdraw from"
 
-		puts "How much?"
-		amount = gets.chomp.to_i
-
-		case choice
+		case account_choice(atm_action)
 		when 1
+			amount = amount_choice()
 			@savings_account.withdraw(amount)
 		when 2
+			amount = amount_choice()
 			@checking_account.withdraw(amount)
+		else
+			account_choice(atm_action)
 		end
 	end
 
 	def transfer
-		puts "From which account would you like to transfer out of?"
+		atm_action = "transfer from"
+
+		case account_choice(atm_action)
+		when 1
+			amount = amount_choice()
+			@savings_account.transfer(@checking_account, amount)
+		when 2
+			amount = amount_choice()
+			@checking_account.transfer(@savings_account, amount)
+		else
+			account_choice(atm_action)
+		end
+	end
+
+	def account_choice(atm_action)
+		puts "From which account would you like to #{atm_action}?"
 		puts "1. Savings Account"
 		puts "2. Checking Account"
 		choice = gets.chomp.to_i
+		return choice
+	end
 
+	def amount_choice
 		puts "How much?"
 		amount = gets.chomp.to_i
-
-		case choice
-		when 1
-			@savings_account.transfer(@checking_account, amount)
-		when 2
-			@checking_account.transfer(@savings_account, amount)
-		end
+		return amount
 	end
 
 end
