@@ -1,6 +1,7 @@
 class Account
 
-    attr_accessor :type, :amount
+    attr_accessor :amount
+    attr_reader :type
 
     def initialize(type, amount)
         @type = type
